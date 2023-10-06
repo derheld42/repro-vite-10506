@@ -5,5 +5,18 @@ export default defineConfig({
 	plugins: [sveltekit()],
 	test: {
 		include: ['src/**/*.{test,spec}.{js,ts}']
+	},
+	build: {
+		rollupOptions: {
+			// Trying potential workaround for
+			// https://github.com/vitejs/vite/issues/10506
+			//
+			// Still fails with:
+			// npm run build
+			// mv build build1
+			// npm run build
+			// diff -qr build build1
+			maxParallelFileOps: 1
+		}
 	}
 });
